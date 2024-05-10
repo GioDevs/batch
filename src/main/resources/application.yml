@@ -1,0 +1,131 @@
+spring:
+  profiles:
+    active: local
+
+
+  application:
+    name: metlife-beneficiaries-api
+    version: 0.0.1
+
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+server:
+  port: 80
+  servlet:
+    context-path: /batch
+
+
+
+
+---
+
+spring:
+  profiles: release
+  datasource:
+    url: jdbc:postgresql://metlife-biometrics-db:5432/metlife_biometrics?sslmode=require
+    username: ${SPRING_DATASOURCES_FAD_USERNAME:fad}
+    password: ${SPRING_DATASOURCES_FAD_PASSWORD:Zaq12wsx.}
+  jpa:
+    hibernate.generate-ddl: none
+    hibernate.ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        enable_lazy_load_no_trans: true
+
+---
+
+spring:
+  profiles: preproduction
+  datasource:
+    url: jdbc:postgresql://metlife-biometrics-db:5432/metlife_biometrics?sslmode=require
+    username: ${SPRING_DATASOURCES_FAD_USERNAME:fad}
+    password: ${SPRING_DATASOURCES_FAD_PASSWORD:Zaq12wsx.}
+  jpa:
+    hibernate.generate-ddl: none
+    hibernate.ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        enable_lazy_load_no_trans: true
+
+---
+
+spring:
+  profiles: qa
+  datasource:
+    url: jdbc:postgresql://metlife-biometrics-db:5432/metlife_biometrics?sslmode=require
+    username: ${SPRING_DATASOURCES_FAD_USERNAME:fad}
+    password: ${SPRING_DATASOURCES_FAD_PASSWORD:Zaq12wsx.}
+  jpa:
+    hibernate.generate-ddl: none
+    hibernate.ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        enable_lazy_load_no_trans: true
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:postgresql://metlife-biometrics-db:5432/metlife_biometrics?sslmode=require
+    username: ${SPRING_DATASOURCES_FAD_USERNAME:fad}
+    password: ${SPRING_DATASOURCES_FAD_PASSWORD:Zaq12wsx.}
+  jpa:
+    hibernate.generate-ddl: none
+    hibernate.ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        enable_lazy_load_no_trans: true
+
+
+---
+spring:
+  profiles: test
+  jpa:
+    hibernate.generate-ddl: none
+    hibernate.ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        enable_lazy_load_no_trans: true
+
+
+
+
+---
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/altumdb_batch
+    username: postgres
+    password: jix
+  jpa:
+    hibernate.generate-ddl: none
+    hibernate.ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        enable_lazy_load_no_trans: true
+  batch:
+    jdbc:
+      initialize-schema:
+
+server:
+  port: 81
+management:
+  server:
+    port: 86
