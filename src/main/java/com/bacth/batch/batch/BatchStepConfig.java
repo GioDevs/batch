@@ -66,7 +66,7 @@ public class BatchStepConfig {
     }
 
     @Bean
-    public CompositeItemWriter <TiendaInfoDto, List<Object>> compositeItemWriter() {
+    public CompositeItemWriter compositeItemWriter() {
         List<ItemWriter> writers = new ArrayList<>();
         writers.add(direccionTiendaWriter);
         writers.add(descripcionTiendaWriter);
