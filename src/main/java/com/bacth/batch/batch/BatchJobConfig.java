@@ -19,7 +19,7 @@ public class BatchJobConfig {
 
     @Bean
     public Job job() {
-        return jobBuilderFactory.get("job5")
+        return jobBuilderFactory.get("job7")
                 .start(step)
                 .build();
     }

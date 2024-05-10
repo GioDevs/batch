@@ -1,7 +1,7 @@
 package com.bacth.batch.batch;
 
-import com.bacth.batch.entity.Person2Dto;
-import com.bacth.batch.entity.PersonDto;
+import com.bacth.batch.dtos.Person2Dto;
+import com.bacth.batch.dtos.PersonDto;
 import org.springframework.batch.item.ItemProcessor;
 
 public class Person2DtoProcessor implements ItemProcessor<PersonDto, Person2Dto> {

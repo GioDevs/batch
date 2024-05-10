@@ -1,4 +1,4 @@
-package com.bacth.batch.entity;
+package com.bacth.batch.dtos;
 
 import lombok.Data;
 
