@@ -20,5 +20,6 @@ public class DireccionTiendaEntity {
     private String id;
 
     private String calle;
+
     private String  ciudad;
 }
