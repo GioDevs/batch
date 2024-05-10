@@ -4,6 +4,7 @@ import com.bacth.batch.dtos.TiendaInfoDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.item.ItemProcessor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +16,14 @@ public class TiendaInfoProcessor implements ItemProcessor<TiendaInfoDto, List<Ob
         tiendaInfo.getPersonas().forEach(personDto -> log.info("persona: {}", personDto));
         log.info("direccion: {}", tiendaInfo.getDireccionTienda());
 
+//
+//        return Arrays.asList(tiendaInfo.getDireccionTienda(), tiendaInfo.getDescripcionTienda(), tiendaInfo.getPersonas());
 
-        return Arrays.asList(tiendaInfo.getDireccionTienda(), tiendaInfo.getDescripcionTienda(), tiendaInfo.getPersonas());
+        List<Object> items = new ArrayList<>();
+        items.add(tiendaInfo.getDireccionTienda());
+        items.add(tiendaInfo.getDescripcionTienda());
+        items.addAll(tiendaInfo.getPersonas());
+        return items;
+
     }
 }

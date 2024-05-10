@@ -13,11 +13,13 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.item.support.CompositeItemWriter;
+import org.springframework.batch.item.support.builder.CompositeItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -40,13 +42,13 @@ public class BatchStepConfig {
     private ItemReader<TiendaInfoDto> jsonGeneralItemReader;
 
     @Autowired
-    private JdbcBatchItemWriter<DireccionTiendaDto> direccionTiendaWriter;
+    private ItemWriter<DireccionTiendaDto> direccionTiendaWriter;
 
     @Autowired
-    private JdbcBatchItemWriter<DescripcionTiendaDto> descripcionTiendaWriter;
+    private ItemWriter<DescripcionTiendaDto> descripcionTiendaWriter;
 
     @Autowired
-    private JdbcBatchItemWriter<PersonDto> personaWriter;
+    private ItemWriter<PersonDto> personaWriter;
 
 
     @Autowired
@@ -56,6 +58,19 @@ public class BatchStepConfig {
     @Bean
     public Step jsonGeneralStep() {
 
+        List<ItemWriter<List<Object>>> itemWriters = new ArrayList<>();
+
+//        List<ItemWriter<?>> writerList = new ArrayList<>();
+//        writerList.add(direccionTiendaWriter);
+//        writerList.add(descripcionTiendaWriter);
+//        writerList.add(personaWriter);
+
+//        ItemWriter<List<Object>> compositeItemWriter = new CompositeItemWriterBuilder<List<Object>>()
+//                .delegates(Arrays.asList(
+//                        direccionTiendaWriter,
+//                        descripcionTiendaWriter,
+//                        personaWriter))
+//                .build();
 
         return stepBuilderFactory.get("jsonGeneralStep")
                 .<TiendaInfoDto, List<Object>>chunk(10)
@@ -65,15 +80,23 @@ public class BatchStepConfig {
                 .build();
     }
 
+//    @Bean
+//    public ItemWriter<List<Object>> compositeItemWriter() {
+//        // Crear el CompositeItemWriter combinando todos los escritores requeridos
+//        return new CompositeItemWriterBuilder<List<Object>>()
+//                .delegates(Arrays.asList(direccionTiendaWriter))
+//                .build();
+//    }
+
     @Bean
     public CompositeItemWriter compositeItemWriter() {
-        List<ItemWriter> writers = new ArrayList<>();
-        writers.add(direccionTiendaWriter);
-        writers.add(descripcionTiendaWriter);
+        List<ItemWriter<?>> writerList = new ArrayList<>();
+        writerList.add(direccionTiendaWriter);
+        writerList.add(descripcionTiendaWriter);
 
         CompositeItemWriter itemWriter = new CompositeItemWriter();
 
-        itemWriter.setDelegates(writers);
+        itemWriter.setDelegates(writerList);
 
         return itemWriter;
     }

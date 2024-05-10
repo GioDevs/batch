@@ -63,39 +63,4 @@ public class BatchConfig {
                 .build();
     }
 
-//    @Bean
-//    public ItemProcessor<TiendaInfoDto, List<Object>> tiendaInfoProcessor() {
-//        return new TiendaInfoProcessor();
-//    }
-
-/*       @Bean
-    public ItemReader<PersonDto> jsonItemReader() {
-
-        String jsonString = "[{\"id\":\"1\",\"nombre\":\"Juan\",\"edad\":25},{\"id\":\"2\",\"nombre\":\"María\",\"edad\":30},{\"id\":\"3\",\"nombre\":\"Pedro\",\"edad\":40}]";
-
-
-        return new JsonItemReaderBuilder<PersonDto>()
-                .jsonObjectReader(new JacksonJsonObjectReader<>(PersonDto.class))
-                .resource(new ByteArrayResource(jsonString.getBytes()))
-                .name("jsonItemReader")
-                .build();
-    }*/
-
-//    @Bean
-//    public JdbcBatchItemWriter<Person2Dto> jdbcItemWriter(DataSource dataSource) {
-//
-//        return new JdbcBatchItemWriterBuilder<Person2Dto>()
-//                .dataSource(dataSource)
-//                .sql("INSERT INTO people (id, nombre, edad) VALUES (:id, :nombreCompleto, :edad)")
-//                .beanMapped()
-//                .build();
-//    }
-
-//    @Bean
-//    public ItemProcessor<PersonDto, Person2Dto> personaProcessor() {
-//        return new Person2DtoProcessor();
-//    }
-//
-
-
 }
